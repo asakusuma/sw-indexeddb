@@ -16,8 +16,8 @@ self.addEventListener('install', function (event) {
   event.waitUntil(set(assetCountKey, 0).then(self.skipWaiting()));
 });
 
-const DB_OP_TIMEOUT = 1000;
-const OPEN_DB_TIMEOUT = 1000;
+const DB_OP_TIMEOUT = 100;
+const OPEN_DB_TIMEOUT = 100;
 
 function guardPromise(promise, timeoutMessage, msTimeout) {
   const timeout = new Promise((resolve, reject) => {
