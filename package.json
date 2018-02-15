@@ -1,0 +1,12 @@
+{
+  "name": "sw-indexeddb",
+  "version": "1.0.0",
+  "description": "Explore indexeddb latency in a sw",
+  "repository": "git@github.com:asakusuma/sw-indexeddb.git",
+  "author": "asakusuma",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.2",
+    "randomstring": "^1.1.5"
+  }
+}

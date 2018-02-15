@@ -1,19 +1,20 @@
-const assetCountKey = 'assetCount';
-self.addEventListener('fetch', function (event) {
-  const updateAssetCount = get(assetCountKey).then((count) => {
+const version = '%HASH%';
+
+const storedCountKey = 'count';
+self.addEventListener('activate', function (event) {
+  console.log('starting activate');
+  const updateAssetCount = get(storedCountKey).then((count) => {
+    console.log('read count', count);
     const newCount = count + 1;
-    return set(assetCountKey, newCount).then(() => {
-      console.log('Updated asset count', newCount);
+    return set(storedCountKey, newCount).then(() => {
+      console.log('Updated count', newCount);
     });
   });
-  const proxy = updateAssetCount.then(() => {
-    return fetch(event.request);
-  });
-  event.respondWith(proxy);
+  event.waitUntil(updateAssetCount);
 });
 
 self.addEventListener('install', function (event) {
-  event.waitUntil(set(assetCountKey, 0).then(self.skipWaiting()));
+  event.waitUntil(set(storedCountKey, 0).then(self.skipWaiting()));
 });
 
 const DB_OP_TIMEOUT = 100;
